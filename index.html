@@ -136,8 +136,8 @@ header.scrolled{background:rgba(11,18,32,.82);backdrop-filter:blur(14px);border-
 .card:hover{transform:translateY(-6px);border-color:rgba(47,129,247,.5);box-shadow:var(--shadow)}
 .card.hide{display:none}
 .card .thumb{aspect-ratio:16/10;overflow:hidden;position:relative;background:linear-gradient(135deg,var(--surface-2),var(--bg-2))}
-.card .thumb img{width:100%;height:100%;object-fit:cover;transition:.5s}
-.card:hover .thumb img{transform:scale(1.07)}
+.card .thumb img,.card .thumb video{width:100%;height:100%;object-fit:cover;transition:.5s;display:block}
+.card:hover .thumb img,.card:hover .thumb video{transform:scale(1.07)}
 .card .thumb.icon{display:grid;place-items:center}
 .card .thumb.icon .emoji{font-size:3.4rem;filter:drop-shadow(0 8px 18px rgba(0,0,0,.5))}
 .card .cat-badge{position:absolute;top:12px;left:12px;background:rgba(4,16,31,.72);backdrop-filter:blur(6px);border:1px solid var(--line);color:var(--accent);font-size:.72rem;font-weight:600;padding:5px 11px;border-radius:100px}
@@ -246,13 +246,12 @@ footer .socials a:hover{transform:translateY(-4px);border-color:var(--brand);col
       </div>
       <div class="hero-stats reveal" data-d="4">
         <div class="s"><b>15+</b><span>Engineering projects</span></div>
-        <div class="s"><b>1+ yr</b><span>Industry experience (EV)</span></div>
+        <div class="s"><b>6+ Months</b><span>Industry experience</span></div>
         <div class="s"><b>IMechE</b><span>FYP Award 2025</span></div>
       </div>
     </div>
     <div class="portrait-wrap reveal" data-d="2">
       <img src="headshot.jpg" alt="Dhanushka Weerakoon" class="portrait" />
-      <div class="badge-float badge-1"><div class="t">Specialisation</div><div class="v">CAD · CFD · Thermal</div></div>
       <div class="badge-float badge-2"><div class="t">University of</div><div class="v">Moratuwa 🇱🇰</div></div>
     </div>
   </div>
@@ -413,52 +412,54 @@ footer .socials a:hover{transform:translateY(-4px);border-color:var(--brand);col
 <script>
 /* ---------- project data ---------- */
 const PROJECTS=[
- {t:"Hydrodynamic Tunnel for Experimental Fluid Dynamics",cat:"thermal",flag:"IMechE Award",img:null,emoji:"🌊",
-  d:"Final-year research: designed & built a hydrodynamic tunnel achieving controlled laminar flow for CFD validation, focusing on flow conditioning and CAD design.",tech:["SolidWorks","CFD","Flow Design"]},
+ {t:"Hydrodynamic Tunnel for Experimental Fluid Dynamics",cat:"thermal",flag:"IMechE Award",img:"hydro-tunnel.jpg",
+  d:"Award-winning final-year group project: designed and built a recirculating hydrodynamic tunnel that produces a controlled, low-turbulence laminar flow for experimental fluid-dynamics teaching and CFD validation. Work spanned flow-conditioning (honeycomb and settling chamber design), contraction-nozzle profiling, pump sizing and full CAD detailing, and the project was recognised with an IMechE award.",tech:["SolidWorks","CFD","Flow Conditioning","Fabrication"]},
  {t:"EV Battery Pack Design & Thermal Optimisation",cat:"thermal",img:"ev-battery.jpg",
-  d:"At VEGA Innovations — optimised Li-ion battery packs including cold-plate design and thermal simulations, improving thermal performance and structural integrity for EVs.",tech:["SolidWorks","Abaqus","Thermal"]},
+  d:"At VEGA Innovations, contributed to the ETX three-wheeler battery pack — optimising the sheet-metal enclosure for faster assembly and less material waste, and designing an extruded aluminium cold plate for liquid cooling. Balanced internal flow paths, thermal conductivity and manufacturability with extrusion vendors, and validated CAD against real hardware on the ETX Pack 4 prototype.",tech:["SolidWorks","Cold Plate","Thermal","DFM"]},
  {t:"Heat Sink Design & Thermal Analysis",cat:"thermal",img:"heatsink.jpg",
-  d:"Analysed forced-convection heat transfer with finned heat sinks using analytical, experimental and CFD methods — optimised via Nusselt & Reynolds evaluations.",tech:["ANSYS","CFD","Heat Transfer"]},
- {t:"CFD Analysis of Compressible Flow — CD Nozzle",cat:"thermal",img:null,emoji:"🚀",
-  d:"2D CFD simulations in ANSYS Fluent analysing compressible flow and shock formation, evaluating pressure, temperature, velocity & density across NPR conditions.",tech:["ANSYS Fluent","Compressible Flow"]},
+  d:"Studied forced- and natural-convection heat transfer from finned heat sinks using analytical, experimental and CFD approaches. Ran SolidWorks Flow Simulations across fin height, spacing and base-plate thickness with mesh-convergence studies, and cross-checked results against hand calculations and an in-house Python/Java heat-sink calculator I developed at VEGA.",tech:["SolidWorks Flow Sim","CFD","Heat Transfer","Python"]},
+ {t:"CFD Analysis of Compressible Flow — CD Nozzle",cat:"thermal",img:"cfd-nozzle.jpg",
+  d:"Two-dimensional CFD study of compressible flow through a converging–diverging nozzle in ANSYS Fluent, capturing shock formation and expansion behaviour. Evaluated how pressure, temperature, velocity and density vary across a range of nozzle-pressure-ratio (NPR) conditions and compared results against isentropic theory.",tech:["ANSYS Fluent","Compressible Flow","Gas Dynamics"]},
  {t:"Laser Welding Optimisation — EV Battery Systems",cat:"design",img:"laser-welding.jpg",
-  d:"Experimental optimisation of laser-welding parameters for cylindrical cell battery assembly — improving weld quality and joint strength for high-current applications.",tech:["Process Design","DoE","Welding"]},
+  d:"Ran laser-welding process trials for battery bus-bar and cylindrical-cell connections at VEGA Innovations. Tuned pulse duration, spot overlap and beam power to minimise defects such as splatter and undercut, then verified joint quality through visual and mechanical inspection to improve pack reliability and reduce electrical resistance.",tech:["Process Design","DoE","Laser Welding","QC"]},
  {t:"Gearbox Design for Fine Material Washer",cat:"design",img:"gearbox.jpg",
-  d:"Designed a complete gearbox from scratch with ISO-standard calculations for gears, shafts, keys and housing for recycling-industry washing systems.",tech:["SolidWorks","ISO Standards","Machine Design"]},
+  d:"Designed a complete gearbox from first principles for a recycling-industry fine-material washer. Sized and selected gears, shafts, keys, bearings and housing with full ISO-standard strength and fatigue calculations, then produced a detailed SolidWorks assembly and manufacturing drawings.",tech:["SolidWorks","ISO Standards","Machine Design"]},
  {t:"Plant Simulation & Optimisation",cat:"design",img:"plant-sim.jpg",
-  d:"Improved efficiency, profit and safety of ECO-Spinders plastic recycling plant through material-flow analysis and Tecnomatix plant simulation.",tech:["Tecnomatix","Process Optimisation"]},
+  d:"Improved throughput, profitability and safety at the ECO-Spinders plastic-recycling plant through material-flow analysis and discrete-event modelling in Siemens Tecnomatix Plant Simulation. Identified bottlenecks and tested layout and scheduling changes virtually before recommending process improvements.",tech:["Tecnomatix","Discrete-Event Sim","Process Optimisation"]},
  {t:"Reverse Engineering — Bicycle Air Pump",cat:"design",img:"bicycle-pump.jpg",
-  d:"Fully disassembled and reverse-engineered a product, identifying materials via testing and proposing manufacturing & material changes to improve durability and cost.",tech:["Reverse Eng.","Materials","GD&T"]},
- {t:"White Pepper Processing Machine",cat:"design",img:null,emoji:"⚙️",
-  d:"Designed a motorised double-roller mechanism to automate white-pepper production — improving efficiency, reducing labour and enhancing product quality.",tech:["Mechanism Design","CAD"]},
- {t:"Automatic Feeding System for Threaded Rods",cat:"design",img:null,emoji:"🔩",
-  d:"Developed an automated feeding mechanism for short-length rods, eliminating manual handling to improve production efficiency and reduce safety risks.",tech:["Automation","Mechanism Design"]},
- {t:"Agricultural Digging Mechanism — 4-Bar Linkage",cat:"design",img:null,emoji:"🚜",
-  d:"Designed a crank-rocker linkage performing digging and refilling in a single motion — modelled and simulated in MATLAB and validated with a physical prototype.",tech:["MATLAB","Kinematics","Prototyping"]},
- {t:"Painting Fume Extraction System",cat:"design",img:null,emoji:"💨",
-  d:"Designed a ventilation & filtration system reducing VOC emissions and particulate exposure in spray-painting operations — improving worker safety & compliance.",tech:["HVAC","Ducting","Airflow"]},
+  d:"Fully disassembled and reverse-engineered a bicycle air pump — measuring and re-modelling every component, identifying materials through simple material tests, and reconstructing the full CAD assembly. Proposed manufacturing-process and material changes with GD&T to improve durability, sealing and unit cost.",tech:["Reverse Eng.","Materials","GD&T","CAD"]},
+ {t:"White Pepper Processing Machine",cat:"design",img:"white-pepper.jpg",
+  d:"Designed a motorised double-roller mechanism to automate the decortication stage of white-pepper production. The design mechanises a traditionally manual, labour-intensive step — improving throughput and hygiene while raising and standardising product quality.",tech:["Mechanism Design","CAD","Automation"]},
+ {t:"Automatic Feeding System for Threaded Rods",cat:"design",img:"rod-feeding.jpg",
+  d:"Developed an automated feeding mechanism that singulates and feeds short threaded rods into a downstream process. Removing manual handling of small parts improved cycle time and consistency while cutting the safety risk of feeding components by hand.",tech:["Automation","Mechanism Design","CAD"]},
+ {t:"Agricultural Digging Mechanism — 4-Bar Linkage",cat:"design",video:"four-bar.mp4",poster:"four-bar-poster.jpg",
+  d:"Designed a crank-rocker four-bar linkage that performs both digging and refilling in a single continuous motion for a low-cost farming implement. Synthesised and simulated the linkage kinematics in MATLAB to tune the coupler path, then built and tested a working physical prototype to validate the motion.",tech:["MATLAB","Kinematics","Linkage Synthesis","Prototyping"]},
+ {t:"Painting Fume Extraction System",cat:"design",img:"fume-extraction.jpg",
+  d:"Designed a ventilation and filtration system to capture VOCs and particulate at source in spray-painting operations. Sized ducting, capture hoods and airflow rates to meet exposure and safety requirements, improving worker health and regulatory compliance on the shop floor.",tech:["HVAC","Ducting","Airflow","Ventilation"]},
  {t:"Automatic Solar Drying Robot",cat:"auto",img:"solar-robot.jpg",
-  d:"Autonomous robot on Arduino DUE that navigates to maximum sunlight, avoids obstacles, remembers GPS coordinates and covers objects when rain is detected.",tech:["Arduino","GPS","Sensors"]},
- {t:"Smart Medibox (IoT)",cat:"auto",img:null,emoji:"💊",
-  d:"IoT medical box with a Node-RED dashboard — temperature/light monitoring, MQTT communication and NTP-scheduled medication dispensing.",tech:["Arduino","Node-RED","MQTT"]},
+  d:"Autonomous drying robot built on an Arduino DUE that seeks maximum sunlight, avoids obstacles and remembers GPS waypoints. On detecting rain it automatically covers the drying produce — combining sensor fusion, navigation logic and actuation into a self-contained field robot.",tech:["Arduino","GPS","Sensors","Robotics"]},
+ {t:"Smart Medibox (IoT)",cat:"auto",img:"medibox.jpg",
+  d:"IoT medicine box with a Node-RED dashboard for remote monitoring and control. Tracks internal temperature and light to protect sensitive medication, communicates over MQTT, and dispenses doses on an NTP-synchronised schedule with reminders.",tech:["Arduino","Node-RED","MQTT","IoT"]},
  {t:"Earendel Pro-Track — Celestial Object Tracker",cat:"auto",img:null,emoji:"🔭",
-  d:"IoT mount for telescopes & long-exposure cameras — PCB design, object-tracking ML algorithms and a location-based altitude/azimuth calculation app.",tech:["IoT","PCB","ML"]},
+  d:"IoT tracking mount for telescopes and long-exposure cameras that keeps a celestial target centred as the sky moves. Work covered custom PCB design, object-tracking algorithms and a location-aware app that computes altitude/azimuth from the user's coordinates and time.",tech:["IoT","PCB Design","Tracking","App"]},
  {t:"Pedestrian Overpass Structural Design",cat:"structural",img:null,emoji:"🌉",
-  d:"Industrial-level structural analysis of a pedestrian overpass considering dead, live, wind and collision loads — designed to comply with industry standards.",tech:["SPACE GASS","Structural","FEA"]},
- {t:"FEA Feasibility — Universal Chain Deflector",cat:"structural",img:null,emoji:"🔗",
-  d:"Finite-element feasibility study of a universal chain deflector, evaluating stress, deflection and structural viability under operating loads.",tech:["FEA","Abaqus","Stress Analysis"]},
- {t:"Water Board Customer Management System",cat:"software",img:null,emoji:"🗄️",
-  d:"Desktop system digitising utility customer registration, updates and billing — full GUI backed by a MySQL database with Git version control.",tech:["Java","MySQL","Git"]},
+  d:"Industrial-level structural design and analysis of a steel pedestrian overpass. Modelled and checked the structure against dead, live, wind and vehicle-collision load cases in SPACE GASS, sizing members and connections to comply with the relevant design codes.",tech:["SPACE GASS","Structural","FEA","Codes"]},
+ {t:"FEA Feasibility — Universal Chain Deflector",cat:"structural",img:"chain-deflector.jpg",
+  d:"Finite-element feasibility study of a universal chain deflector to judge whether the concept could survive its operating loads. Evaluated stress distribution, deflection and factors of safety across load cases to guide the go/no-go design decision and identify high-stress regions to reinforce.",tech:["FEA","Stress Analysis","CAD"]},
+ {t:"SMPS Mount Design & Manufacturing",cat:"design",img:"smps-mount.jpg",
+  d:"At VEGA Innovations, designed a sheet-metal mounting system (iterated V1–V3) to hold multiple switched-mode power supplies for continuous EV subsystem testing. Modelled precise sheet-metal parts in SolidWorks, exported DXFs for laser cutting, then bent and welded them — refining each version to fix fastener access, tidy cable management, and speed up assembly using rivet nuts instead of bolts.",tech:["SolidWorks Sheet Metal","DXF / Laser Cut","Fabrication","DFM"]},
+ {t:"Water Board Customer Management System",cat:"software",img:"water-board.jpg",
+  d:"Desktop application that digitises utility customer registration, record updates and billing for a water board. Built a full Java GUI backed by a MySQL database with validation and reporting, managed under Git version control.",tech:["Java","MySQL","GUI","Git"]},
  {t:"Fully Functional Shopping Website",cat:"software",img:"shopping-web.jpg",
-  d:"E-commerce site with clickable catalogue, contact-seller and comment features — built with HTML, CSS and JavaScript using Git for version control.",tech:["HTML","CSS","JavaScript"]},
+  d:"E-commerce website with a clickable product catalogue, contact-seller messaging and customer comments. Built front-to-back with HTML, CSS and JavaScript and version-controlled with Git.",tech:["HTML","CSS","JavaScript","Git"]},
 ];
 const CAT_LABEL={design:"Design & CAD",thermal:"Thermal & CFD",auto:"Automation & IoT",structural:"Structural & FEA",software:"Software"};
 
 const grid=document.getElementById('projGrid');
 grid.innerHTML=PROJECTS.map(p=>`
   <article class="card reveal" data-cat="${p.cat}">
-    <div class="thumb ${p.img?'':'icon'}">
-      ${p.img?`<img src="${p.img}" alt="${p.t}" loading="lazy">`:`<span class="emoji">${p.emoji}</span>`}
+    <div class="thumb ${(p.img||p.video)?'':'icon'}">
+      ${p.video?`<video src="${p.video}" poster="${p.poster||''}" autoplay muted loop playsinline preload="metadata"></video>`:(p.img?`<img src="${p.img}" alt="${p.t}" loading="lazy">`:`<span class="emoji">${p.emoji}</span>`)}
       <span class="cat-badge">${CAT_LABEL[p.cat]}</span>
       ${p.flag?`<span class="flag">🏆 ${p.flag}</span>`:''}
     </div>
